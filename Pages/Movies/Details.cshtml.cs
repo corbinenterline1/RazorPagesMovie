@@ -24,6 +24,7 @@ namespace RazorPagesMovie.Pages.Movies
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            // With the @page "{id:int?}" directive, OnGetAsync method returns NotFound (404).
             if (id == null)
             {
                 return NotFound();

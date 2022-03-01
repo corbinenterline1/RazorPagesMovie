@@ -20,10 +20,13 @@ namespace RazorPagesMovie.Pages.Movies
         {
             _context = context;
         }
-
+        // Enables Model binding. The form values on the page are bound to the Movie Property.
         [BindProperty]
         public Movie Movie { get; set; }
 
+        // When an HTTP GET request is made, the OnGetAsync method fetches the movie from the DB & returns the Page method.
+        // Page method renders the Pages/Movies/Edit.cshtml Razor Page. That same file contains the model directive @model RazorPagesMovie.Pages.Movies.EditModel, which makes the movie model available on the page.
+        // Edit form is displayed with the values from the movie.
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -55,6 +58,7 @@ namespace RazorPagesMovie.Pages.Movies
             {
                 await _context.SaveChangesAsync();
             }
+            // Concurrency conflict handling.
             catch (DbUpdateConcurrencyException)
             {
                 if (!MovieExists(Movie.ID))
